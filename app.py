@@ -36,7 +36,7 @@ prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            "You are a helpful assistant. Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous.",
+            "You are a helpful assistant. Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous. Give confirmation that you have completed the task, and then ask if the user needs any more help.",
         ),
         MessagesPlaceholder(variable_name=MEMORY_KEY),
         ("user", "{input}"),
@@ -83,10 +83,10 @@ def listen_input():
             engine.say(result["output"])
             engine.runAndWait()
             print(result["output"])
-            if len(result["intermediate_steps"]) != 0:
-                engine.say("Is there anything else you would like me to help you with?")
-                engine.runAndWait()
-                print("Is there anything else you would like me to help you with?")
+            # if len(result["intermediate_steps"]) != 0:
+            #     engine.say("Is there anything else you would like me to help you with?")
+            #     engine.runAndWait()
+            #     print("Is there anything else you would like me to help you with?")
 
         except sr.UnknownValueError:
             print("Could not understand audio")
